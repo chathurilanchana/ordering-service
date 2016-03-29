@@ -1,0 +1,13 @@
+{application, ordering,
+ [
+  {description, ""},
+  {vsn, "1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib,
+                  lager
+                 ]},
+  {mod, { ordering_app, []}},
+  {env, []}
+ ]}.
