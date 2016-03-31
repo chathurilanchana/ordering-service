@@ -47,7 +47,12 @@ init([ServerName]) ->
 
 
 %dummy server just receives messages and ignore them
-handle_call({add_remote_labels,_Batch_To_Deliver},_From,State=#state{count = Count})->
+handle_call({add_remote_labels,Batch_To_Deliver},_From,State=#state{count = Count})->
+    Delivered_Size=length(Batch_To_Deliver),
+    case Delivered_Size>20000 of
+        true->lager:info("length is ~p ~n",[Delivered_Size]);
+        _->noop
+    end,
     {reply,ok,State#state{count = Count+1}};
     
 handle_call(_Request, _From, State) ->
